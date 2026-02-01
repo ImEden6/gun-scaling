@@ -14,3 +14,4 @@ A Fabric mod that bridges **Soulslike Weaponry** and **Ranged Weapon API** to al
 
 ## License
 MIT
+Read
