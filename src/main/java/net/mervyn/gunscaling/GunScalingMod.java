@@ -9,6 +9,7 @@ public class GunScalingMod implements ModInitializer {
     @Override
     public void onInitialize() {
         GunScalingConfig.load();
-        LOGGER.info("Gun Scaling loaded. Mode: {}", GunScalingConfig.INSTANCE.scalingMode);
+        LOGGER.info("Gun Scaling loaded. Multiplier: {}, Additive: {}", GunScalingConfig.INSTANCE.damageMultiplier,
+                GunScalingConfig.INSTANCE.damageAdditive);
     }
 }

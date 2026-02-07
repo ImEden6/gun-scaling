@@ -30,27 +30,18 @@ public class ShootSilverBulletMixin {
         if (attributeInstance == null)
             return;
 
-        double attrValue = attributeInstance.getValue(); // This includes base + modifiers
-        // Note: Ranged Weapon API base is 0.0, so this usually just represents the
-        // bonus.
-
         float baseDamage = (float) projectile.getDamage();
-        float newDamage = baseDamage;
-        float multiplier = GunScalingConfig.INSTANCE.damageMultiplier;
 
-        if (GunScalingConfig.INSTANCE.scalingMode == GunScalingConfig.ScalingMode.ADDITIVE) {
-            // mode: ADDITIVE
-            newDamage = baseDamage + (float) (attrValue * multiplier);
-        } else {
-            // mode: MULTIPLICATIVE
-            // Assuming attrValue is flat bonus to be used as percentage (e.g. 5.0 = 500%?
-            // No, usually 0.5 = 50%)
-            // If the attribute is generally small (like 1.0, 2.0), treating it as a flat
-            // multiplier to 1 might be huge.
-            // But per user request: base * (1 + attr * mult)
-            // Example: Base 10, Attr 2.0 (from API), Mult 1.0 -> 10 * (1 + 2.0) = 30.
-            newDamage = baseDamage * (1.0f + (float) (attrValue * multiplier));
-        }
+        float multiplier = GunScalingConfig.INSTANCE.damageMultiplier;
+        float additive = GunScalingConfig.INSTANCE.damageAdditive;
+        double attrBonus = attributeInstance.getValue();
+
+        // Formula: final = (base * multiplier) + additive + the attribute bonus
+        // Note: attributeInstance.getValue() includes base + modifiers. Ranged Weapon
+        // API base is 0.0.
+        // Assuming attrBonus IS the attribute bonus the user wants added at the end.
+
+        float newDamage = (float) ((baseDamage * multiplier) + additive + attrBonus);
 
         projectile.setDamage(newDamage);
     }
