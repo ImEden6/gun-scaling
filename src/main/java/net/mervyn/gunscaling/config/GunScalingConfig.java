@@ -12,7 +12,7 @@ import java.io.IOException;
 public class GunScalingConfig {
     private static final File CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve("gun_scaling.json")
             .toFile();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger("gun-scaling");
 
     public static GunScalingConfig INSTANCE = new GunScalingConfig();
