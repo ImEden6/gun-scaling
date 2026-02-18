@@ -7,7 +7,8 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.soulsweaponry.items.gun.GunItem;
-import net.mervyn.gunscaling.config.GunScalingConfig;
+import net.mervyn.gunscaling.GunScalingMod;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,8 +33,8 @@ public class ShootSilverBulletMixin {
 
         float baseDamage = (float) projectile.getDamage();
 
-        float multiplier = GunScalingConfig.INSTANCE.damageMultiplier;
-        float additive = GunScalingConfig.INSTANCE.damageAdditive;
+        float multiplier = GunScalingMod.configManager.value.damageMultiplier;
+        float additive = GunScalingMod.configManager.value.damageAdditive;
         double attrBonus = attributeInstance.getValue();
 
         // Formula: final = (base * multiplier) + additive + the attribute bonus

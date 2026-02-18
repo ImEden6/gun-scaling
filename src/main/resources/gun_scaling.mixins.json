@@ -3,7 +3,10 @@
     "package": "net.mervyn.gunscaling.mixin",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
-        "ShootSilverBulletMixin"
+        "ShootSilverBulletMixin",
+        "GunInfinityMixin",
+        "GunTooltipMixin",
+        "GunAmmoMixin"
     ],
     "injectors": {
         "defaultRequire": 1
