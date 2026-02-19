@@ -17,8 +17,8 @@ public class GunScalingMod implements ModInitializer {
                 .build();
         configManager.refresh();
 
-        LOGGER.info("Gun Scaling loaded. Multiplier: {}, Additive: {}",
-                configManager.value.damageMultiplier,
-                configManager.value.damageAdditive);
+        LOGGER.info("Gun Scaling loaded. Additive: {}, Scaling Factor: {}",
+                configManager.value.damageAdditive,
+                configManager.value.damageScalingFactor);
     }
 }

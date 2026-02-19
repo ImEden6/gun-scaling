@@ -33,16 +33,16 @@ public class ShootSilverBulletMixin {
 
         float baseDamage = (float) projectile.getDamage();
 
-        float multiplier = GunScalingMod.configManager.value.damageMultiplier;
         float additive = GunScalingMod.configManager.value.damageAdditive;
+        float scalingFactor = GunScalingMod.configManager.value.damageScalingFactor;
         double attrBonus = attributeInstance.getValue();
 
-        // Formula: final = (base * multiplier) + additive + the attribute bonus
-        // Note: attributeInstance.getValue() includes base + modifiers. Ranged Weapon
-        // API base is 0.0.
-        // Assuming attrBonus IS the attribute bonus the user wants added at the end.
+        // Formula: Final Damage = (Base + Additive) * (1 + Attribute Bonus / Scaling
+        // Factor)
+        if (scalingFactor == 0)
+            scalingFactor = 1.0f; // Prevent division by zero
 
-        float newDamage = (float) ((baseDamage * multiplier) + additive + attrBonus);
+        float newDamage = (float) ((baseDamage + additive) * (1 + (attrBonus / scalingFactor)));
 
         projectile.setDamage(newDamage);
     }
